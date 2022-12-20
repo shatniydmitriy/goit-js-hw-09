@@ -1,3 +1,4 @@
+
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
@@ -52,20 +53,20 @@ function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
 }
 
-function onTimer() {
-let timeObject = convertMs(countdown);
-      days.textContent = addLeadingZero(timeObject.days);
-      hours.textContent = addLeadingZero(timeObject.hours);
-      minutes.textContent = addLeadingZero(timeObject.minutes);
-      seconds.textContent = addLeadingZero(timeObject.seconds);
-}
-
 btnStart.addEventListener('click', () => {
   let timer = setInterval(() => {
     let countdown = new Date(text.value) - new Date();
-    btnStart.disabled = true;
-    if (countdown >= 0) {
-        onTimer();
+      btnStart.disabled = true;
+      function onTimer() {
+        let timeObject = convertMs(countdown);
+        days.textContent = addLeadingZero(timeObject.days);
+        hours.textContent = addLeadingZero(timeObject.hours);
+        minutes.textContent = addLeadingZero(timeObject.minutes);
+        seconds.textContent = addLeadingZero(timeObject.seconds);
+    
+}
+      if (countdown >= 0) {
+        onTimer()
     
     } else {
       Notiflix.Notify.success('Countdown finished');
@@ -73,4 +74,3 @@ btnStart.addEventListener('click', () => {
     }
   }, 1000);
 });
-
